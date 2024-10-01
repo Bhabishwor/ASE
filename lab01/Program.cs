@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace lab01
 {
@@ -15,7 +16,12 @@ namespace lab01
 
 		public Program()
 		{
-			Console.WriteLine("Hello, World!");
+			MessageBox.Show(
+				"Hello, World!",
+				"lab01",
+				MessageBoxButtons.OK,
+				MessageBoxIcon.Information
+			);
 		}
 	}
 }
