@@ -10,6 +10,11 @@ namespace lab01
 	{
 		static void Main(string[] args)
 		{
+			Program app = new Program();
+		}
+
+		public Program()
+		{
 			Console.WriteLine("Hello, World!");
 		}
 	}
