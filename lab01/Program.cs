@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace lab01
@@ -16,12 +12,33 @@ namespace lab01
 
 		public Program()
 		{
+			float weight = ReadMeasurement("Weight(kg)");
+			float height = ReadMeasurement("Height(m)");
+			char gender = ReadGender();
+			
+			string message = 
+				"Weight(kg): " + weight.ToString() + 
+				"\nHeight(m): " + height.ToString() +
+				"\nGender: " + gender;
+
 			MessageBox.Show(
-				"Hello, World!",
+				message,
 				"lab01",
 				MessageBoxButtons.OK,
 				MessageBoxIcon.Information
 			);
+		}
+
+		private float ReadMeasurement(string type)
+		{ 
+			Console.Write(type + ": ");
+			return Single.Parse(Console.ReadLine());
+		}
+
+		private char ReadGender()
+		{
+			Console.Write("Gender (M/F): ");
+			return Char.Parse(Console.ReadLine());
 		}
 	}
 }
