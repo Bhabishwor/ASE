@@ -18,7 +18,7 @@ namespace lab01
 			{
 				DialogResult isMetric = MessageBox.Show(
 					"Are you using the metric system?",
-					"lab01",
+					"Metric or Imperial?",
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question
 				);
@@ -40,14 +40,14 @@ namespace lab01
 
 				MessageBox.Show(
 					message,
-					"lab01",
+					"Result",
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Information
 				);
 
 				repeatPrompt = MessageBox.Show(
 					"Do you want to calculate another BMI?",
-					"lab01",
+					"Calculate Again?",
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question
 				);
