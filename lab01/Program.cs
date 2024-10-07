@@ -12,22 +12,34 @@ namespace lab01
 
 		public Program()
 		{
-			float weight = ReadMeasurement("Weight(kg)");
-			float height = ReadMeasurement("Height(m)");
-			char gender = ReadGender();
+			DialogResult result = DialogResult.Yes;
 			
-			float bmi = CalculateBMI(weight, height);
-			string category = CategorizeBMI(bmi, gender);
-			
-			string message = "BMI: " + bmi +
-				"\nYou are " + category;
+			while (result == DialogResult.Yes)
+			{
+				float weight = ReadMeasurement("Weight(kg)");
+				float height = ReadMeasurement("Height(m)");
+				char gender = ReadGender();
 
-			MessageBox.Show(
-				message,
-				"lab01",
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Information
-			);
+				float bmi = CalculateBMI(weight, height);
+				string category = CategorizeBMI(bmi, gender);
+
+				string message = "BMI: " + bmi +
+								 "\nYou are " + category;
+
+				MessageBox.Show(
+						message,
+						"lab01",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Information
+						);
+
+				result = MessageBox.Show(
+						"Do you want to calculate another BMI?",
+						"lab01",
+						MessageBoxButtons.YesNo,
+						MessageBoxIcon.Question
+						);
+			}
 		}
 
 		private float ReadMeasurement(string type)
@@ -87,7 +99,7 @@ namespace lab01
 			}
 			else
 			{
-				return "Error: BMI too high to categorize.";
+				return "not in any category. BMI too high to categorize.";
 			}
 		}
 	}
