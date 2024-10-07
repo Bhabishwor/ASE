@@ -12,33 +12,45 @@ namespace lab01
 
 		public Program()
 		{
-			DialogResult result = DialogResult.Yes;
+			DialogResult repeatPrompt = DialogResult.Yes;
 			
-			while (result == DialogResult.Yes)
+			while (repeatPrompt == DialogResult.Yes)
 			{
-				float weight = ReadMeasurement("Weight(kg)");
-				float height = ReadMeasurement("Height(m)");
-				char gender = ReadGender();
+				DialogResult isMetric = MessageBox.Show(
+					"Are you using the metric system?",
+					"lab01",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Question
+				);
+				
+				Console.WriteLine(
+					"Using " + 
+					(isMetric == DialogResult.Yes ? "kilograms & metres" : "pounds & inches") + 
+					"..."
+				);
 
-				float bmi = CalculateBMI(weight, height);
+				float weight = ReadMeasurement("Weight");
+				float height = ReadMeasurement("Height");
+				char gender = ReadGender();
+				
+				float bmi = CalculateBMI(weight, height, isMetric);
 				string category = CategorizeBMI(bmi, gender);
 
-				string message = "BMI: " + bmi +
-								 "\nYou are " + category;
+				string message = "BMI: " + bmi + "\nYou are " + category;
 
 				MessageBox.Show(
-						message,
-						"lab01",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Information
-						);
+					message,
+					"lab01",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Information
+				);
 
-				result = MessageBox.Show(
-						"Do you want to calculate another BMI?",
-						"lab01",
-						MessageBoxButtons.YesNo,
-						MessageBoxIcon.Question
-						);
+				repeatPrompt = MessageBox.Show(
+					"Do you want to calculate another BMI?",
+					"lab01",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Question
+				);
 			}
 		}
 
@@ -54,9 +66,9 @@ namespace lab01
 			return Char.Parse(Console.ReadLine());
 		}
 
-		private float CalculateBMI(float weight, float height)
+		private float CalculateBMI(float weight, float height, DialogResult isMetric)
 		{	
-			return weight / (height * height);
+			return weight / (height * height) * (isMetric == DialogResult.Yes ? 1 : 703);
 		}
 
 		private string CategorizeBMI(float bmi, char gender)
